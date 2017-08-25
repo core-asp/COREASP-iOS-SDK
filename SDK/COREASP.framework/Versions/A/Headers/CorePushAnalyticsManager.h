@@ -31,6 +31,18 @@
  */
 - (void)requestAppLaunchAnalytics:(nonnull NSString *)pushId latitude:(nullable NSString *)latitude longitude:(nullable NSString *)longitude;
 
+/**
+ 通知からのアプリ起動時のデータを送信します。アクションキーを指定することで通知IDに紐づくアクションを分析することができます。actionKeyパラメータにnilを指定した場合は、起動数を表すアクションキーの001が設定されます。<br/><br/>
+ 送信に成功した場合は CorePushAnalyticsManagerDelegate#analyticsManagerSuccess が呼ばれます。<br/>
+ 送信に失敗した場合は CorePushAnalyticsManagerDelegate#analyticsManagerFail が呼ばれます。
+ 
+ @param pushId 通知ID
+ @param actionKey CORE ASP管理画面のアクション設定のアクションキー。nilが指定された場合は、起動数を表すアクションキーの001が設定されます。
+ @param latitude 緯度
+ @param longitude 経度
+ */
+- (void)requestAppLaunchAnalytics:(nonnull NSString *)pushId actionKey:(nullable NSString *)actionKey latitude:(nullable NSString *)latitude longitude:(nullable NSString *)longitude;
+
 @end
 
 /**

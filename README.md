@@ -348,6 +348,22 @@ if let pushId = userInfo["push_id"] as? String {
 *	フォアグラウンド状態で動作中に通知を受信した場合に呼び出される CorePushManagerDelegate#handleForegroundNotification 
 *	アプリケーションが動作していない状態で通知から起動した場合に呼び出される　CorePushManagerDelegate#handleLaunchingNotification
 
+### 分散配信機能について
+※分散配信機能を使用する場合は、SDKのバージョン1.1.0以上を推奨します。
+
+分散配信機能は、配信対象の通知を複数のグループに分割し、分割したグループごとに通知を配信する機能になります。分散配信された通知の通知IDの値は、分割したグループごとに異なる値が割り当てられます。
+
+この通知IDと管理画面のアクション設定に記載のアクションキーの組み合わせをアクセス解析用のパラメータとして CORE ASPサーバに対して送信することで、分散配信された通知の起動数や各アクション数を分析することができます。
+
+アクションキーを含めたアクセス解析用のパラメータを CORE ASPサーバに送信するには、CorePushAnalyticsManager#requestAppLaunchAnalytics:actionKey:latitude:longitudeメソッドを使用します。
+
+```swift
+let pushId = ＜起動時に取得した通知IDの値＞
+
+// アクションキーの101を指定した場合
+CorePushAnalyticsManager.shared.requestAppLaunchAnalytics(pushId, actionKey:"101" latitude: "0", longitude: "0")
+```
+
 ## プッシュ通知の送信エラー
 
 ### エラー内容の把握
